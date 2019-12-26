@@ -21,4 +21,5 @@ house_model.fit(x,y)
 
 #Predict
 print("The prediction are :")
-print(house_model.predict(x.head()))
+print(house_model.predict(x))
+numpy.savetxt('model_prediction.csv',house_model.predict(x.head(5)))
