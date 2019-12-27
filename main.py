@@ -1,6 +1,11 @@
 import pandas
 import numpy,sklearn
 
+#For model validation 
+from sklearn.model_selection import train_test_split
+from skelarn.metrics import mean_absolute_error
+########################################################
+
 house_data = pandas.read_csv('melb_data.csv')
 print(house_data.head())
 house_data=house_data.dropna(axis=0)
@@ -12,14 +17,23 @@ y = house_data.Price
 house_features=['Rooms', 'Bathroom', 'Landsize', 'Lattitude', 'Longtitude']
 x=house_data[house_features]
 
+#To split the files into train and test
+train_x,test_x,train_y,test_y=train_test_split(x,y)
+####################################################
+
 #Definition
 from sklearn.tree import DecisionTreeRegressor
 house_model = DecisionTreeRegressor(random_state=1)
 
 #fit
-house_model.fit(x,y)
+house_model.fit(train_x,train_y)
 
 #Predict
 print("The prediction are :")
-print(house_model.predict(x))
-numpy.savetxt('model_prediction.csv',house_model.predict(x.head(5)))
+prediction_value=(house_model.predict(train_x))
+print(house_model.predict(train_x))
+numpy.savetxt('model_prediction.csv',house_model.predict(train_x)
+print(mean_absolute_error(train_y,prediction_value))
+
+
+#################################################
