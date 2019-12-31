@@ -3,7 +3,7 @@ import numpy,sklearn
 
 #For model validation 
 from sklearn.model_selection import train_test_split
-from skelarn.metrics import mean_absolute_error
+from sklearn.metrics import mean_absolute_error
 ########################################################
 
 house_data = pandas.read_csv('melb_data.csv')
@@ -25,15 +25,17 @@ train_x,test_x,train_y,test_y=train_test_split(x,y)
 from sklearn.tree import DecisionTreeRegressor
 house_model = DecisionTreeRegressor(random_state=1)
 
+#To check over and underfitting#
+#####
 #fit
 house_model.fit(train_x,train_y)
 
 #Predict
 print("The prediction are :")
-prediction_value=(house_model.predict(train_x))
-print(house_model.predict(train_x))
-numpy.savetxt('model_prediction.csv',house_model.predict(train_x)
-print(mean_absolute_error(train_y,prediction_value))
+prediction_value=(house_model.predict(test_x))
+print(house_model.predict(test_x))
+numpy.savetxt('model_prediction.csv',house_model.predict(test_x))
+print(mean_absolute_error(test_y,prediction_value))
 
 
 #################################################
